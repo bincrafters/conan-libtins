@@ -10,7 +10,7 @@ environment:
     CONAN_CHANNEL: "stable"
     VS140COMNTOOLS: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2015\\Community\\Common7\\Tools\\"
     CONAN_UPLOAD: "https://bintray.com/bincrafters/public-conan"
-    CONAN_REMOTES: "https://api.bintray.com/other_bintray_user/conan-repo"
+    CONAN_REMOTES: "https://api.bintray.com/bincrafters/conan-repo"
 
     matrix:
         - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
