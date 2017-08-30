@@ -28,5 +28,7 @@ install:
   - conan remote add bincrafters https://api.bintray.com/conan/%CONAN_USERNAME%/public-conan
   
 test_script:
+  - echo %CD%
+  - dir
   - python build.py
  
