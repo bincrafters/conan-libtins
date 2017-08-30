@@ -6,7 +6,7 @@ class LibtinsConan(ConanFile):
     author = "mfontanini"
     description = "High-level, multiplatform C++ network packet sniffing and crafting library"
     license = "https://github.com/mfontanini/libtins/blob/master/LICENSE"
-    url = "https://github.com/mfontanini/libtins"
+    url = "https://github.com/bincrafters/conan-libtins"
     settings = "os", "compiler", "build_type", "arch"
     options = {
         "shared": [True, False],
