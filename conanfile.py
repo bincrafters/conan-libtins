@@ -16,19 +16,12 @@ class LibtinsConan(ConanFile):
         "enable_wpa2": [True, False],
         "enable_tcpip": [True, False],
         "enable_ack_tracker": [True, False],
+        "win_capture_lib": ["winpcap", "npcap"],
         "enable_tcp_stream_custom_data": [True, False]
     }
-    default_options = "shared=True", "enable_pcap=True", "enable_cxx11=True", "enable_dot11=True", "enable_wpa2=True", "enable_tcpip=True", "enable_ack_tracker=True", "enable_tcp_stream_custom_data=True"
+    default_options = "shared=True", "enable_pcap=True", "enable_cxx11=True", "enable_dot11=True", "enable_wpa2=True", "enable_tcpip=True", "enable_ack_tracker=True", "enable_tcp_stream_custom_data=True", "win_capture_lib=npcap"
     generators = "cmake"
 
-    def source(self):
-        source_url =  "https://github.com/mfontanini/libtins"
-        archive_name = "v" + self.version        
-        tools.get("{0}/archive/{1}.tar.gz".format(source_url, archive_name))
-        tools.get("https://github.com/mfontanini/libtins/archive/v3.5.tar.gz")
-        self.run("dir")
-        os.rename(self.name + "-" + archive_name, self.name)
-            
     def requirements(self):
         if self.options.enable_pcap:
             if self.settings.os == "Windows":
@@ -40,25 +33,30 @@ class LibtinsConan(ConanFile):
         if self.options.enable_ack_tracker or self.options.enable_tcp_stream_custom_data:
             self.requires.add("Boost/1.60.0@lasote/stable")
 
+    def source(self):
+        source_url =  "https://github.com/mfontanini/libtins"
+        archive_name = "v" + self.version        
+        tools.get("{0}/archive/{1}.tar.gz".format(source_url, archive_name))
+        os.rename(self.name + "-" + self.version  , self.name)
+
     def build(self):
-            with tools.chdir(self.name):
-                conan_magic_lines = """PROJECT(libtins)
-            INCLUDE(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
-            CONAN_BASIC_SETUP()"""
-                tools.replace_in_file("CMakeLists.txt", "PROJECT(libtins)", conan_magic_lines)
-                cmake = CMake(self)
-                cmake.definitions["LIBTINS_BUILD_SHARED"] = self.options.shared
-                cmake.definitions["LIBTINS_ENABLE_PCAP"] = self.options.enable_pcap
-                cmake.definitions["LIBTINS_ENABLE_CXX11"] = self.options.enable_cxx11
-                cmake.definitions["LIBTINS_ENABLE_DOT11"] = self.options.enable_dot11
-                cmake.definitions["LIBTINS_ENABLE_WPA2"] = self.options.enable_wpa2
-                cmake.definitions["LIBTINS_ENABLE_TCPIP"] = self.options.enable_tcpip
-                cmake.definitions["LIBTINS_ENABLE_ACK_TRACKER"] = self.options.enable_ack_tracker
-                cmake.definitions["LIBTINS_ENABLE_TCP_STREAM_CUSTOM_DATA"] = self.options.enable_tcp_stream_custom_data
-                cmake.definitions["LIBTINS_BUILD_TESTS"] = False
-                cmake.definitions["LIBTINS_BUILD_EXAMPLES"] = False
-                cmake.configure()
-                cmake.build()
+        conan_magic_lines = """PROJECT(libtins)
+    INCLUDE(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+    CONAN_BASIC_SETUP()"""
+        tools.replace_in_file(os.path.join(self.name, "CMakeLists.txt"), "PROJECT(libtins)", conan_magic_lines)
+        cmake = CMake(self)
+        cmake.definitions["LIBTINS_BUILD_SHARED"] = self.options.shared
+        cmake.definitions["LIBTINS_ENABLE_PCAP"] = self.options.enable_pcap
+        cmake.definitions["LIBTINS_ENABLE_CXX11"] = self.options.enable_cxx11
+        cmake.definitions["LIBTINS_ENABLE_DOT11"] = self.options.enable_dot11
+        cmake.definitions["LIBTINS_ENABLE_WPA2"] = self.options.enable_wpa2
+        cmake.definitions["LIBTINS_ENABLE_TCPIP"] = self.options.enable_tcpip
+        cmake.definitions["LIBTINS_ENABLE_ACK_TRACKER"] = self.options.enable_ack_tracker
+        cmake.definitions["LIBTINS_ENABLE_TCP_STREAM_CUSTOM_DATA"] = self.options.enable_tcp_stream_custom_data
+        cmake.definitions["LIBTINS_BUILD_TESTS"] = False
+        cmake.definitions["LIBTINS_BUILD_EXAMPLES"] = False
+        cmake.configure(source_dir=self.name)
+        cmake.build()
 
     def package(self):
         self.copy("LICENSE", dst=".", keep_path=False)
@@ -67,6 +65,7 @@ class LibtinsConan(ConanFile):
         self.copy("*.so*", dst="lib", keep_path=False)
         self.copy("*.dylib", dst="lib", keep_path=False)
         self.copy("*.a", dst="lib", keep_path=False)
-
+        self.copy("*.lib", dst="lib", keep_path=False)
+            
     def package_info(self):
         self.cpp_info.libs = self.collect_libs()
