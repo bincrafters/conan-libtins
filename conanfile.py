@@ -25,6 +25,8 @@ class LibtinsConan(ConanFile):
         source_url =  "https://github.com/mfontanini/libtins"
         archive_name = "v" + self.version        
         tools.get("{0}/archive/{1}.tar.gz".format(source_url, archive_name))
+        tools.get("https://github.com/mfontanini/libtins/archive/v3.5.tar.gz")
+        self.run("dir")
         os.rename(self.name + "-" + archive_name, self.name)
             
     def requirements(self):
