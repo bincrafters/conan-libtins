@@ -20,9 +20,13 @@ class LibtinsConan(ConanFile):
     }
     default_options = "shared=True", "enable_pcap=True", "enable_cxx11=True", "enable_dot11=True", "enable_wpa2=True", "enable_tcpip=True", "enable_ack_tracker=True", "enable_tcp_stream_custom_data=True"
     generators = "cmake"
-    exports = "LICENSE"
-    exports_sources = "src/*", "include/*", "CMakeLists.txt", "cmake/*", "libtins.pc.in"
 
+    def source(self):
+        source_url =  "https://github.com/mfontanini/libtins"
+        archive_name = "v" + version        
+        tools.get("{0}/{1}/archive/{2}.tar.gz".format(source_url, self.name, archive_name))
+        os.rename(self.name + "-" + archive_name, self.name)
+            
     def requirements(self):
         if self.options.enable_pcap:
             if self.settings.os == "Windows":
@@ -35,23 +39,24 @@ class LibtinsConan(ConanFile):
             self.requires.add("Boost/1.60.0@lasote/stable")
 
     def build(self):
-        conan_magic_lines = """PROJECT(libtins)
-    INCLUDE(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
-    CONAN_BASIC_SETUP()"""
-        tools.replace_in_file("CMakeLists.txt", "PROJECT(libtins)", conan_magic_lines)
-        cmake = CMake(self)
-        cmake.definitions["LIBTINS_BUILD_SHARED"] = self.options.shared
-        cmake.definitions["LIBTINS_ENABLE_PCAP"] = self.options.enable_pcap
-        cmake.definitions["LIBTINS_ENABLE_CXX11"] = self.options.enable_cxx11
-        cmake.definitions["LIBTINS_ENABLE_DOT11"] = self.options.enable_dot11
-        cmake.definitions["LIBTINS_ENABLE_WPA2"] = self.options.enable_wpa2
-        cmake.definitions["LIBTINS_ENABLE_TCPIP"] = self.options.enable_tcpip
-        cmake.definitions["LIBTINS_ENABLE_ACK_TRACKER"] = self.options.enable_ack_tracker
-        cmake.definitions["LIBTINS_ENABLE_TCP_STREAM_CUSTOM_DATA"] = self.options.enable_tcp_stream_custom_data
-        cmake.definitions["LIBTINS_BUILD_TESTS"] = False
-        cmake.definitions["LIBTINS_BUILD_EXAMPLES"] = False
-        cmake.configure()
-        cmake.build()
+            with tools.chdir(self.name):
+                conan_magic_lines = """PROJECT(libtins)
+            INCLUDE(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+            CONAN_BASIC_SETUP()"""
+                tools.replace_in_file("CMakeLists.txt", "PROJECT(libtins)", conan_magic_lines)
+                cmake = CMake(self)
+                cmake.definitions["LIBTINS_BUILD_SHARED"] = self.options.shared
+                cmake.definitions["LIBTINS_ENABLE_PCAP"] = self.options.enable_pcap
+                cmake.definitions["LIBTINS_ENABLE_CXX11"] = self.options.enable_cxx11
+                cmake.definitions["LIBTINS_ENABLE_DOT11"] = self.options.enable_dot11
+                cmake.definitions["LIBTINS_ENABLE_WPA2"] = self.options.enable_wpa2
+                cmake.definitions["LIBTINS_ENABLE_TCPIP"] = self.options.enable_tcpip
+                cmake.definitions["LIBTINS_ENABLE_ACK_TRACKER"] = self.options.enable_ack_tracker
+                cmake.definitions["LIBTINS_ENABLE_TCP_STREAM_CUSTOM_DATA"] = self.options.enable_tcp_stream_custom_data
+                cmake.definitions["LIBTINS_BUILD_TESTS"] = False
+                cmake.definitions["LIBTINS_BUILD_EXAMPLES"] = False
+                cmake.configure()
+                cmake.build()
 
     def package(self):
         self.copy("LICENSE", dst=".", keep_path=False)

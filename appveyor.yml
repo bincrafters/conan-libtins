@@ -8,8 +8,9 @@ environment:
     CONAN_REFERENCE: "libtins/3.5"
     CONAN_USERNAME: "bincrafters"
     CONAN_CHANNEL: "stable"
-    VS150COMNTOOLS: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Community\\Common7\\Tools\\"
+    VS140COMNTOOLS: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2015\\Community\\Common7\\Tools\\"
     CONAN_UPLOAD: "https://bintray.com/bincrafters/public-conan"
+    CONAN_REMOTES: "https://api.bintray.com/other_bintray_user/conan-repo"
 
     matrix:
         - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
@@ -25,10 +26,7 @@ install:
   - pip.exe install conan --upgrade
   - pip.exe install conan_package_tools
   - conan user # It creates the conan data directory
-  - conan remote add bincrafters https://api.bintray.com/conan/%CONAN_USERNAME%/public-conan
   
 test_script:
-  - echo %CD%
-  - dir
   - python build.py
  
