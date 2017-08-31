@@ -9,7 +9,7 @@ environment:
     CONAN_USERNAME: "bincrafters"
     CONAN_CHANNEL: "stable"
     VS140COMNTOOLS: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2015\\Community\\Common7\\Tools\\"
-    CONAN_UPLOAD: "https://bintray.com/bincrafters/public-conan"
+    CONAN_UPLOAD: "https://api.bintray.com/conan/bincrafters/public-conan"
     CONAN_REMOTES: "https://api.bintray.com/conan/bincrafters/public-conan"
 
     matrix:
