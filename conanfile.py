@@ -25,7 +25,7 @@ class LibtinsConan(ConanFile):
     def requirements(self):
         if self.options.enable_pcap:
             if self.settings.os == "Windows":
-                if self.options.win_cpature_lib == "npcap":
+                if self.options.win_capture_lib == "npcap":
                     self.requires.add("WinPcap/4.1.2@RoliSoft/stable")
                 else:
                     self.requires.add("npcap/0.93@bincrafters/testing")
@@ -63,7 +63,7 @@ class LibtinsConan(ConanFile):
 
     def package(self):
         self.copy("LICENSE", dst=".", keep_path=False)
-        self.copy("*.h", dst="include", src="include")
+        self.copy("*.h", dst="include")
         self.copy("*.dll", dst="bin", keep_path=False)
         self.copy("*.so*", dst="lib", keep_path=False)
         self.copy("*.dylib", dst="lib", keep_path=False)
