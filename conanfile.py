@@ -63,7 +63,7 @@ class LibtinsConan(ConanFile):
 
     def package(self):
         self.copy("LICENSE", dst=".", keep_path=False)
-        self.copy("*.h", dst="include")
+        self.copy("*.h", dst="include", src=os.path.join("libtins", "include"))
         self.copy("*.dll", dst="bin", keep_path=False)
         self.copy("*.so*", dst="lib", keep_path=False)
         self.copy("*.dylib", dst="lib", keep_path=False)
