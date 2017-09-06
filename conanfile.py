@@ -25,7 +25,10 @@ class LibtinsConan(ConanFile):
     def requirements(self):
         if self.options.enable_pcap:
             if self.settings.os == "Windows":
-                self.requires.add("WinPcap/4.1.2@RoliSoft/stable")
+                if self.options.win_cpature_lib == "npcap":
+                    self.requires.add("WinPcap/4.1.2@RoliSoft/stable")
+                else:
+                    self.requires.add("npcap/0.93@bincrafters/testing")
             else:
                 self.requires.add("libpcap/1.8.1@uilianries/stable")
         if self.options.enable_wpa2:
