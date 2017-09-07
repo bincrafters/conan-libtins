@@ -21,6 +21,14 @@ environment:
           CONAN_VISUAL_VERSIONS: 15
 
 
+platform:
+  - x86
+  - x64
+  
+configuration:
+  - Release
+  - Debug 
+  
 install:
   - set PATH=%PATH%;%PYTHON%/Scripts/
   - pip.exe install conan --upgrade
