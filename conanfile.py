@@ -34,11 +34,12 @@ class LibtinsConan(ConanFile):
         if self.options.enable_wpa2:
             self.requires.add("OpenSSL/1.0.2l@conan/stable")
         if self.options.enable_ack_tracker or self.options.enable_tcp_stream_custom_data:
-            self.requires.add("Boost/1.64.0@conan/stable")
-
+            self.requires.add("Boost.Any/1.64.0@bincrafters/testing")
+            self.requires.add("Boost.Icl/1.64.0@bincrafters/testing")
+    
     def source(self):
         source_url =  "https://github.com/mfontanini/libtins"
-        tools.get("{0}/archive/v{1}.tar.gz".format(source_url, archive_name))
+        tools.get("{0}/archive/v{1}.tar.gz".format(source_url, self.version))
         os.rename(self.name + "-" + self.version  , self.name)
 
     def build(self):
