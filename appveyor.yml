@@ -4,10 +4,6 @@ environment:
     PYTHON: "C:\\Python27"
     PYTHON_VERSION: "2.7.8"
     PYTHON_ARCH: "32"
-
-    CONAN_REFERENCE: "libtins/3.5"
-    CONAN_USERNAME: "bincrafters"
-    CONAN_CHANNEL: "stable"
     VS140COMNTOOLS: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2015\\Community\\Common7\\Tools\\"
 
     matrix:

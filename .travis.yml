@@ -1,12 +1,4 @@
-
-env:
-   global:
-     - CONAN_REFERENCE: "libtins/3.5"
-     - CONAN_USERNAME: "bincrafters"
-     - CONAN_CHANNEL: "stable"
-     - CONAN_REMOTES: "https://api.bintray.com/conan/bincrafters/public-conan, https://api.bintray.com/conan/conan-community/conan"
-     - CONAN_UPLOAD: "https://api.bintray.com/conan/bincrafters/public-conan"     
-     
+    
 linux: &linux
    os: linux
    sudo: required
