@@ -41,7 +41,7 @@ class LibtinsConan(ConanFile):
     def source(self):
         source_url =  "https://github.com/mfontanini/libtins"
         self.run("git clone --recursive --depth=1 --branch=master {0}.git".format(source_url)) 
-   
+
     def build(self):
         conan_magic_lines = """PROJECT(libtins)
     INCLUDE(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
