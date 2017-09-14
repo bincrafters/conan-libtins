@@ -39,7 +39,7 @@ class LibtinsConan(ConanFile):
             self.requires.add("Boost.Any/1.64.0@bincrafters/testing")
             
     def source(self):
-        source_url =  "https://github.com/mfontanini/libtins"
+        source_url =  "https://github.com/bincrafters/libtins"
         self.run("git clone --recursive --depth=1 --branch=master {0}.git".format(source_url)) 
 
     def build(self):
