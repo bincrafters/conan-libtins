@@ -39,8 +39,8 @@ class LibtinsConan(ConanFile):
             self.requires.add("Boost.Any/1.64.0@bincrafters/testing")
             
     def source(self):
-        source_url =  "https://github.com/bincrafters/libtins"
-        self.run("git clone --recursive --depth=1 --branch=master {0}.git".format(source_url)) 
+        source_url = "https://github.com/mfontanini/libtins"
+        self.run("git clone --recursive --depth=1 --branch=master {0}.git".format(source_url))
 
     def build(self):
         conan_magic_lines = """PROJECT(libtins)
@@ -63,7 +63,7 @@ class LibtinsConan(ConanFile):
 
     def package(self):
         self.copy("LICENSE", dst=".", keep_path=False)
-        self.copy("*.h", dst="include", src=os.path.join("libtins", "include"))
+        self.copy("*.h", dst="include", src=os.path.join(self.name, "include", "tins"))
         self.copy("*.dll", dst="bin", keep_path=False)
         self.copy("*.so*", dst="lib", keep_path=False)
         self.copy("*.dylib", dst="lib", keep_path=False)
