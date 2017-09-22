@@ -1,7 +1,5 @@
-#include <boost/atomic.hpp>
+#include <tins/tins.h>
 
-int main()
-{
-	boost::atomic_int test(0);
+int main() {
+    Tins::EthernetII eth = Tins::EthernetII() / Tins::IP() / Tins::TCP();
 }
-

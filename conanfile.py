@@ -28,15 +28,15 @@ class LibtinsConan(ConanFile):
                 if self.options.winpcap_mode:
                     self.requires.add("WinPcap/4.1.2@RoliSoft/stable")
                 else:
-                    self.requires.add("npcap/0.93@bincrafters/testing")
+                    self.requires.add("npcap/0.94@bincrafters/stable")
                     self.options["npcap"].winpcap_mode = self.options.winpcap_mode
             else:
                 self.requires.add("libpcap/1.8.1@uilianries/stable")
         if self.options.enable_wpa2:
             self.requires.add("OpenSSL/1.0.2l@conan/stable")
         if self.options.enable_ack_tracker or self.options.enable_tcp_stream_custom_data:
-            self.requires.add("Boost.Icl/1.64.0@bincrafters/testing")
-            self.requires.add("Boost.Any/1.64.0@bincrafters/testing")
+            self.requires.add("Boost.Icl/1.64.0@bincrafters/stable")
+            self.requires.add("Boost.Any/1.64.0@bincrafters/stable")
             
     def source(self):
         source_url = "https://github.com/mfontanini/libtins"
