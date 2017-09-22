@@ -12,6 +12,7 @@ class TestPackageConan(ConanFile):
         cmake.build()
         
     def imports(self):
+        self.copy("*", dst="bin", src="bin")
         self.copy("*", dst="bin", src="lib")
         
     def test(self):
