@@ -77,4 +77,4 @@ class LibtinsConan(ConanFile):
         self.copy("*.lib", dst="lib", keep_path=False)
             
     def package_info(self):
-        self.cpp_info.libs = self.collect_libs()
+        self.cpp_info.libs = tools.collect_libs(self)
