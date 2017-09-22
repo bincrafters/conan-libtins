@@ -47,6 +47,12 @@ class LibtinsConan(ConanFile):
     INCLUDE(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
     CONAN_BASIC_SETUP()"""
         tools.replace_in_file(os.path.join(self.name, "CMakeLists.txt"), "PROJECT(libtins)", conan_magic_lines)
+        
+        #Patch for name collision on llc.cpp with libpcap/1
+        tools.replace_in_file(os.path.join(self.name, "src", "llc.cpp"), "llc.h", "../include/tins/llc.h")
+        tools.replace_in_file(os.path.join(self.name, "src", "dot3.cpp"), "llc.h", "../include/tins/llc.h")
+        tools.replace_in_file(os.path.join(self.name, "src", "loopback.cpp"), "llc.h", "../include/tins/llc.h")
+        
         cmake = CMake(self)
         cmake.definitions["LIBTINS_BUILD_SHARED"] = self.options.shared
         cmake.definitions["LIBTINS_ENABLE_PCAP"] = self.options.enable_pcap
