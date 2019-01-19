@@ -56,6 +56,10 @@ class LibtinsConan(ConanFile):
         tools.get("{0}/archive/v{1}.tar.gz".format(self.homepage, self.version), sha256=sha256sum)
         extracted_dir = self.name + "-" + self.version
         os.rename(extracted_dir, self._source_subfolder)
+        tools.replace_in_file(
+            f"{self._source_subfolder}/src/CMakeLists.txt", 
+            "    EXPORT libtinsTargets\n",
+            "    EXPORT libtinsTargets\n" +             "    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}\n")
 
     def _configure_cmake(self):
         cmake = CMake(self)
@@ -77,15 +81,7 @@ class LibtinsConan(ConanFile):
         cmake.build()
 
     def package(self):
-        # self.copy("LICENSE", dst=".", keep_path=False)
-        # self.copy("*.h", dst="include", src=os.path.join(self.name, "include"))
-        # self.copy("*.dll", dst="bin", keep_path=False)
-        # self.copy("*.so*", dst="lib", keep_path=False)
-        # self.copy("*.dylib", dst="lib", keep_path=False)
-        # self.copy("*.a", dst="lib", keep_path=False)
-        # self.copy("*.lib", dst="lib", keep_path=False)
-        
-        self.copy(pattern="LICENSE", dst="licenses", src=self._source_subfolder)
+        self.copy(pattern="LICENSE", dst="licenses", src=self._source_subfolder, keep_path=False)
         cmake = self._configure_cmake()
         cmake.install()
             
