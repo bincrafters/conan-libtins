@@ -57,7 +57,7 @@ class LibtinsConan(ConanFile):
         extracted_dir = self.name + "-" + self.version
         os.rename(extracted_dir, self._source_subfolder)
         tools.replace_in_file(
-            f"{self._source_subfolder}/src/CMakeLists.txt", 
+            "{0}/src/CMakeLists.txt".format(self._source_subfolder), 
             "    EXPORT libtinsTargets\n",
             "    EXPORT libtinsTargets\n" +             "    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}\n")
 
