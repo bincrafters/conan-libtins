@@ -1,55 +1,45 @@
-[![badge](https://img.shields.io/badge/conan.io-libtins%2F3.5-green.svg?logo=data:image/png;base64%2CiVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAMAAAAolt3jAAAA1VBMVEUAAABhlctjlstkl8tlmMtlmMxlmcxmmcxnmsxpnMxpnM1qnc1sn85voM91oM11oc1xotB2oc56pNF6pNJ2ptJ8ptJ8ptN9ptN8p9N5qNJ9p9N9p9R8qtOBqdSAqtOAqtR%2BrNSCrNJ/rdWDrNWCsNWCsNaJs9eLs9iRvNuVvdyVv9yXwd2Zwt6axN6dxt%2Bfx%2BChyeGiyuGjyuCjyuGly%2BGlzOKmzOGozuKoz%2BKqz%2BOq0OOv1OWw1OWw1eWx1eWy1uay1%2Baz1%2Baz1%2Bez2Oe02Oe12ee22ujUGwH3AAAAAXRSTlMAQObYZgAAAAFiS0dEAIgFHUgAAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQfgBQkREyOxFIh/AAAAiklEQVQI12NgAAMbOwY4sLZ2NtQ1coVKWNvoc/Eq8XDr2wB5Ig62ekza9vaOqpK2TpoMzOxaFtwqZua2Bm4makIM7OzMAjoaCqYuxooSUqJALjs7o4yVpbowvzSUy87KqSwmxQfnsrPISyFzWeWAXCkpMaBVIC4bmCsOdgiUKwh3JojLgAQ4ZCE0AMm2D29tZwe6AAAAAElFTkSuQmCC)](http://www.conan.io/source/libtins/3.5/bincrafters/stable) 
-[![License](https://img.shields.io/badge/License-BSD%202--Clause-orange.svg)](https://opensource.org/licenses/BSD-2-Clause)
-[![Build status](https://ci.appveyor.com/api/projects/status/5mbka78e73xn93jm?svg=true)](https://ci.appveyor.com/project/bincrafters/conan-libtins)
-[![Build Status](https://travis-ci.org/bincrafters/conan-libtins.svg?branch=master)](https://travis-ci.org/bincrafters/conan-libtins)
+## Package Status
 
-# LIBTINS is a library for sniffing and crafting packets. 
+| Bintray | Windows | Linux & macOS |
+|:--------:|:---------:|:-----------------:|
+|[![Download](https://api.bintray.com/packages/bincrafters/public-conan/libtins%3Abincrafters/images/download.svg) ](https://bintray.com/bincrafters/public-conan/libtins%3Abincrafters/_latestVersion)|[![Build status](https://ci.appveyor.com/api/projects/status/github/bincrafters/conan-libtins?svg=true)](https://ci.appveyor.com/project/bincrafters/conan-libtins)|[![Build Status](https://travis-ci.org/bincrafters/conan-libtins.svg)](https://travis-ci.org/bincrafters/conan-libtins)|
 
-[Conan.io](https://conan.io) package for [libtins](https://github.com/mfontanini/libtins) project
+## Conan.io Information
 
-The packages generated with this **conanfile** can be found in [conan.io](https://conan.io/source/libtins/3.5/bincrafters/stable).
+Bincrafters packages can be found in the following public Conan repository:
 
-## Dependencies
+[Bincrafters Public Conan Repository on Bintray](https://bintray.com/bincrafters/public-conan)
 
-Libtins depends on other libraries:
-* Linux and Mac - libpcap
-* Windows - WinPCAP or NPCAP 
-* OpenSSL - Optional
+*Note: You can click the "Set Me Up" button on the Bintray page above for instructions on using packages from this repository.*
 
-## Build packages
+## Issues
 
-Download conan client from [Conan.io](https://conan.io) and run:
+If you wish to report an issue or make a request for a Bincrafters package, please do so here:
 
-    $ python build.py
+[Bincrafters Community Issues](https://github.com/bincrafters/community/issues)
 
-If your are in Windows you should run it from a VisualStudio console in order to get "mc.exe" in path.
+## General Information
 
-## Upload packages to server
+This GIT repository is managed by the Bincrafters team and holds files related to Conan.io.  For detailed information about Bincrafters and Conan.io, please visit the following resources:
 
-    $ conan upload libtins/3.5@bincrafters/stable --all
+[Bincrafters Wiki - Common README](https://github.com/bincrafters/community/wiki/Common-README.md)
 
-## Reuse the packages
+[Bincrafters Technical Documentation](http://bincrafters.readthedocs.io/en/latest/)
 
-### Basic setup
+[Bincrafters Blog](https://bincrafters.github.io)
 
-    $ conan install libtins/3.5@bincrafters/stable
+## License Information
 
-### Project setup
+Bincrafters packages are hosted on [Bintray](https://bintray.com) and contain Open-Source software which is licensed by the software's maintainers and NOT Bincrafters.  For each Open-Source package published by Bincrafters, the packaging process obtains the required license files along with the original source files from the maintainer, and includes these license files in the generated Conan packages.
 
-If you handle multiple dependencies in your project is better to add a *conanfile.txt*
+The contents of this GIT repository are completely separate from the software being packaged and therefore licensed separately.  The license for all files contained in this GIT repository are defined in the [LICENSE.md](LICENSE.md) file in this repository.  The licenses included with all Conan packages published by Bincrafters can be found in the Conan package directories in the following locations, relative to the Conan Cache root (`~/.conan` by default):
 
-    [requires]
-    libtins/3.5@bincrafters/stable
-	
-    [generators]
-    txt
-    cmake
+### License(s) for packaged software:
 
-Complete the installation of requirements for your project running:</small></span>
+    ~/.conan/data/<pkg_name>/<pkg_version>/bincrafters/package/<random_package_id>/license/<LICENSE_FILES_HERE>
 
-    conan install . 
+*Note :   The most common filenames for OSS licenses are `LICENSE` AND `COPYING` without file extensions.*
 
-Project setup installs the library (and all his dependencies) and generates the files *conanbuildinfo.txt* and *conanbuildinfo.cmake* with all the paths and variables that you need to link with your dependencies.
+### License for Bincrafters recipe:
 
-### License
-[BSD-2](LICENSE)
+    ~/.conan/data/<pkg_name>/<pkg_version>/bincrafters/export/LICENSE.md

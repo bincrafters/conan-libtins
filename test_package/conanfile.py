@@ -1,4 +1,8 @@
-from conans import ConanFile, CMake, tools
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
+
+from conans import ConanFile, CMake
 import os
 
 
@@ -10,10 +14,7 @@ class TestPackageConan(ConanFile):
         cmake = CMake(self)
         cmake.configure()
         cmake.build()
-        
-    def imports(self):
-        self.copy("*", dst="bin", src="bin")
-        self.copy("*", dst="bin", src="lib")
-        
+
     def test(self):
-        self.run(os.path.join("bin","test_package"))
+        bin_path = os.path.join("bin", "test_package")
+        self.run(bin_path, run_environment=True)
