@@ -69,8 +69,7 @@ class LibtinsConan(ConanFile):
         cmake.definitions["LIBTINS_ENABLE_TCP_STREAM_CUSTOM_DATA"] = self.options.enable_tcp_stream_custom_data
         cmake.definitions["LIBTINS_BUILD_TESTS"] = False
         cmake.definitions["LIBTINS_BUILD_EXAMPLES"] = False
-        cmake.configure(source_dir=self._source_subfolder)
-        cmake.configure(build_folder=self._build_subfolder)
+        cmake.configure()
         return cmake
         
     def build(self):
