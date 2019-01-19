@@ -44,7 +44,7 @@ class LibtinsConan(ConanFile):
             if self.settings.os == "Windows":
                 self.requires.add("winpcap/4.1.3@bincrafters/stable")
             else:
-                self.requires.add("libpcap/1.8.1@uilianries/stable")
+                self.requires.add("libpcap/1.8.1@bincrafters/stable")
         if self.options.enable_wpa2:
             self.requires.add("OpenSSL/1.0.2l@conan/stable")
         if self.options.enable_ack_tracker or self.options.enable_tcp_stream_custom_data:
