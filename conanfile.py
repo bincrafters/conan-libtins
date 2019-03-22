@@ -52,7 +52,7 @@ class LibtinsConan(ConanFile):
             self.requires.add("boost_any/1.69.0@bincrafters/stable")
             
     def source(self):
-        sha256sum = "81a0ae1e04499b25984b2833579d33c4a78ff4513e9a14176c574e855163f7a5"
+        sha256sum = "a9fed73e13f06b06a4857d342bb30815fa8c359d00bd69547e567eecbbb4c3a1"
         tools.get("{0}/archive/v{1}.tar.gz".format(self.homepage, self.version), sha256=sha256sum)
         extracted_dir = self.name + "-" + self.version
         os.rename(extracted_dir, self._source_subfolder)
