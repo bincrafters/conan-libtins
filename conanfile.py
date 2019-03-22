@@ -3,7 +3,7 @@ import os
 
 class LibtinsConan(ConanFile):
     name = "libtins"
-    version = "4.1"
+    version = "4.2"
     author = "mfontanini"
     description = "High-level, multiplatform C++ network packet sniffing and crafting library"
     topics = ("conan", "libpcap", "winpcap", "pcap", "networking", "packets")
@@ -42,7 +42,7 @@ class LibtinsConan(ConanFile):
     def requirements(self):
         if self.options.enable_pcap:
             if self.settings.os == "Windows":
-                self.requires.add("winpcap/4.1.3@bincrafters/stable")
+                self.requires.add("winpcap/4.2.3@bincrafters/stable")
             else:
                 self.requires.add("libpcap/1.8.1@bincrafters/stable")
         if self.options.enable_wpa2:
@@ -87,3 +87,7 @@ class LibtinsConan(ConanFile):
             
     def package_info(self):
         self.cpp_info.libs = tools.collect_libs(self)
+        if not self.options.shared:
+            self.cpp_info.defines.append("TINS_STATIC")
+        if self.settings.os == "Windows":
+            self.cpp_info.libs.append("Iphlpapi")
