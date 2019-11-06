@@ -10,7 +10,6 @@ class LibtinsConan(ConanFile):
     license = "MIT"
     url = "https://github.com/bincrafters/conan-libtins"
     homepage = "https://github.com/mfontanini/libtins"
-    author = "Bincrafters <bincrafters@gmail.com>"
     license = "BSD-2-Clause"
     exports = ["LICENSE.md"]
     exports_sources = ["CMakeLists.txt"]
