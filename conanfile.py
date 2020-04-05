@@ -11,7 +11,6 @@ class LibtinsConan(ConanFile):
     url = "https://github.com/bincrafters/conan-libtins"
     homepage = "https://github.com/mfontanini/libtins"
     license = "BSD-2-Clause"
-    exports = ["LICENSE.md"]
     exports_sources = ["CMakeLists.txt"]
     generators = "cmake"
     settings = "os", "compiler", "build_type", "arch"
